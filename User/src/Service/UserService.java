@@ -10,102 +10,105 @@ public class UserService {
 
     public final List<User> listUsers = new ArrayList<>();
 
-    int id =0;
+    int id = 1;
 
     Scanner op = new Scanner(System.in);
 
     public void addUser() {
 
-        
-            Scanner op = new Scanner(System.in);
-    
-            User newUser = new User();
-    
-            System.out.print("\nIngresa un nombre de usuario:");
-            newUser.setUser(op.next());
-    
-            System.out.print("\nIngresa un correo electronico:");
-            newUser.setEmail(op.next()); 
-    
-            System.out.print("\nIngresa una contraeña:");
-            newUser.setPassword(op.next());
-            
-            newUser.setId(id);
+        User newUser = new User();
 
-            listUsers.add(newUser);
+        Scanner op = new Scanner(System.in);
 
-            id++;
+        System.out.print("\nIngresa un nombre de usuario:");
+        newUser.setUser(op.next());
 
-            System.out.println("\nUsuario agregado exitosamente!");
-            
-            
-        }
+        System.out.print("\nIngresa un correo electronico:");
+        newUser.setEmail(op.next());
+
+        System.out.print("\nIngresa una contraeña:");
+        newUser.setPassword(op.next());
+
+        newUser.setId(id);
+
+        listUsers.add(newUser);
+
+        id++;
+
+        System.out.println("\nUsuario agregado exitosamente!");
+
+    }
 
     public void editUser() {
 
-        for (User users : listUsers) {
-
-            System.out.println(users); 
-
+        for (User user : listUsers) {
+            System.out.println(user);
         }
 
-        System.out.println("Ingresa tu ID");
-        int editarID = op.nextInt();
+        System.out.print("\nIngresa el ID del usuario que deseas editar: ");
+        int editId = op.nextInt();
 
-        /*if (listUsers.getId(editarID)) {
+        User editUser = null;
+        for (User user : listUsers) {
+            if (user.getId() == editId) {
+                editUser = user;
+                break;
+            }
+        }
 
-            User newUser = new User();
+        if (editUser != null) {
+            System.out.print("\nIngresa un nuevo nombre de usuario: ");
+            editUser.setUser(op.next());
 
-            System.out.print("\nIngresa un nombre de usuario:");
-            newUser.setUser(op.next());
-    
-            System.out.print("\nIngresa un correo electronico:");
-            newUser.setEmail(op.next()); 
-    
-            System.out.print("\nIngresa una contraeña:");
-            newUser.setPassword(op.next());
-            
-            newUser.setId(id);
+            System.out.print("\nIngresa un nuevo correo electrónico: ");
+            editUser.setEmail(op.next());
 
-            listUsers.add(id,newUser);
+            System.out.print("\nIngresa una nueva contraseña: ");
+            editUser.setPassword(op.next());
 
-            id++;
+            System.out.println("\nUsuario editado exitosamente!");
+        } else {
+            System.out.println("Usuario no encontrado con ID: " + editId);
+        }
 
-            System.out.println("\nUsuario agregado exitosamente!");
-
-            
-        }*/
-
-        System.out.println("\nUsuario editado exitosamente!");
     }
 
     public void deletUser() {
 
-        for (User users : listUsers) {
-
-            System.out.println(users);
-
+        for (User user : listUsers) {
+            System.out.println(user);
         }
 
-        System.out.println("Ingresa tu ID");
-        int eliminarID = op.nextInt();
+        System.out.print("\nIngresa el ID del usuario que deseas eliminar: ");
+        int deleteId = op.nextInt();
 
-        listUsers.remove(eliminarID);
+        // Buscar el usuario con ese ID
+        boolean userFound = false;
+        for (User user : listUsers) {
+            if (user.getId() == deleteId) {
+                listUsers.remove(user);
+                System.out.println("\nUsuario eliminado exitosamente!");
+                userFound = true;
+                break;
+            }
+        }
 
-        System.out.println("\nUsuario eliminado exitosamente!");
-
+        if (!userFound) {
+            System.out.println("Usuario no encontrado con ID: " + deleteId);
+        }
     }
 
     public void consultUser() {
 
         System.out.println("Consultar usuarios ");
 
-        for (User users : listUsers) {
-
-            System.out.println(users);
+        if (listUsers.isEmpty()) {
+            System.out.println("No hay usuarios registrados.");
+        } else {
+            for (User user : listUsers) {
+                System.out.println(user);
+            }
 
         }
-
     }
 }
-    

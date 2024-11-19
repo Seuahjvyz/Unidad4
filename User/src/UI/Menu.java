@@ -28,12 +28,6 @@ public class Menu {
 
             switch (opcion) {
 
-                case 0:
-
-                    System.out.println("Adio");
-
-                    break;
-
                 case 1:
 
                     users.addUser();
@@ -63,7 +57,7 @@ public class Menu {
 
             }
 
-        } while (opcion >= 0 && opcion <= 4);
+        } while (opcion !=0);
 
     }
 
